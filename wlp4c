@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# terminal output colours
+RED='\033[0;31m'
+NC='\033[0m'
+
+# no input file error
+if [ ${#} -lt 1 ]; then
+        echo -e "wlp4: ${RED}fatal error:${NC} no input files" >&2 
+        echo "compilation terminated." >&2
+        exit 1
+fi 
+
+mv $1 Compiler
+cd Compiler
+
+# compilation pipeline
+cat $1 | ./wlp4scan | ./wlp4parse | ./wlp4gen > "${1%%.*}.asm"
+
+mv "${1%%.*}.asm" ..
+mv $1 ..
