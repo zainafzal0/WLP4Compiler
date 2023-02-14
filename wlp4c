@@ -11,8 +11,6 @@ if [ ${#} -lt 1 ]; then
         exit 1
 fi 
 
-mv $1 Compiler
-cd Compiler
 
 # compilation pipeline
 cat $1 | ./wlp4scan | ./wlp4parse | ./wlp4gen > "${1%%.*}.asm"
